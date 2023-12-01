@@ -9,7 +9,7 @@ function init() {
 	const container = document.createElement( 'div' );
 	document.body.appendChild( container );
 
-	camera = new THREE.PerspectiveCamera( 15, window.innerWidth / window.innerHeight, 0.25, 20 );
+	camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.25, 20 );
 	camera.position.set( 0, 0, -1 );
 
 	scene = new THREE.Scene();
@@ -28,9 +28,11 @@ function init() {
 			loader.load( 'apple-vision-pro.glb', async function ( gltf ) {
 				const model = gltf.scene;
 				await renderer.compileAsync( model, camera, scene );
+				var sizeN = 3;//缩放倍率
+				model.scale.set(sizeN,sizeN,sizeN);
 				scene.add( model );
 				render();
-			} );
+			});
 		} );
 
 	renderer = new THREE.WebGLRenderer( { antialias: true } );
@@ -43,7 +45,7 @@ function init() {
 	const controls = new OrbitControls( camera, renderer.domElement );
 	controls.addEventListener( 'change', render );
 	controls.minDistance = 1;
-	controls.maxDistance = 5;
+	controls.maxDistance = 3;
 	controls.target.set( 0, 0, 0 );
 	controls.update();
 
