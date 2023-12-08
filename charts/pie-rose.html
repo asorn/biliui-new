@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN" style="height: 100%">
+
+<head>
+  <meta charset="utf-8">
+</head>
+
+<body style="height: 100%; margin: 0">
+  <div id="container" style="height: 100%"></div>
+
+
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+
+  <script type="text/javascript">
+    var dom = document.getElementById('container');
+    var myChart = echarts.init(dom, null, {
+      renderer: 'canvas',
+      useDirtyRect: false
+    });
+    var app = {};
+
+    var option;
+
+    option = {
+      tooltip: {
+        trigger: 'item',
+        borderWidth: '0',
+        textStyle: {
+          fontSize: 12
+        },
+        formatter: '{a} <br/>{b} : {c} ({d}%)'
+      },
+      legend: {
+        left: 'center',
+        top: 'top',
+        icon: "roundRect",
+        itemWidth: 16,
+        itemHeight: 8,
+        textStyle: {
+          color: "#324558",
+          fontStyle: "italic",
+          lineHeight: 20
+        },
+        data: [
+          '21-24',
+          '25-27',
+          '18-20',
+          '28-31',
+          '32-35',
+          '36-40',
+          '41-44',
+          '45以上'
+        ]
+      },
+      series: [
+        {
+          name: '用户数与占比',
+          type: 'pie',
+          radius: [20, 120],
+          top: '80',
+          left: 'center',
+          width: '640',
+          height: '220',
+          center: ['50%', '50%'],
+          roseType: 'area',
+          itemStyle: {
+            borderRadius: 4,
+            borderColor: '#fff',
+            borderWidth: 2
+          },
+          data: [
+            { value: 2508, name: '21-24', itemStyle: {color: '#5B8FF9'} },
+            { value: 2116, name: '25-27', itemStyle: {color: '#61DDAA'} },
+            { value: 1898, name: '18-20', itemStyle: {color: '#65789B'}  },
+            { value: 1674, name: '28-31', itemStyle: {color: '#F6BD16'}  },
+            { value: 1431, name: '32-35', itemStyle: {color: '#7262FD'}  },
+            { value: 1267, name: '36-40', itemStyle: {color: '#78D3F8'}  },
+            { value: 1084, name: '41-44', itemStyle: {color: '#9661BC'}  },
+            { value: 819, name: '45以上', itemStyle: {color: '#F6903D'}  }
+          ]
+        }
+      ]
+    };
+
+    if (option && typeof option === 'object') {
+      myChart.setOption(option);
+    }
+
+    window.addEventListener('resize', myChart.resize);
+  </script>
+</body>
+
+</html>

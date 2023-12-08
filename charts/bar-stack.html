@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN" style="height: 100%">
+
+<head>
+  <meta charset="utf-8">
+</head>
+
+<body style="height: 100%; margin: 0">
+  <div id="container" style="height: 100%"></div>
+
+
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+
+  <script type="text/javascript">
+    var dom = document.getElementById('container');
+    var myChart = echarts.init(dom, null, {
+      renderer: 'canvas',
+      useDirtyRect: false
+    });
+    var app = {};
+
+    var option;
+
+    option = {
+      /*       color: {
+        data: ['#5470c6', '#91cc75', '#fac858', '#ee6666', '#73c0de', '#3ba272', '#fc8452', '#9a60b4', '#ea7ccc']
+      }, */
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'shadow'
+        },
+        textStyle: {
+          fontSize: 12
+        }
+      },
+      legend: {
+        icon: "roundRect",
+        itemWidth: 16,
+        itemHeight: 8,
+        textStyle: {
+          color: "#324558",
+          fontStyle: "italic",
+          lineHeight: 20
+        }
+      },
+      grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+      },
+      xAxis: [
+        {
+          type: 'category',
+          axisLine: {
+            show: true,
+            lineStyle: {
+              color: "#697886"
+            }
+          },
+          data: ['数据可视化平台', '数据标识系统', '数据分析系统', '项目协作平台', '测试平台']
+        }
+      ],
+      yAxis: [
+        {
+          type: 'value',
+          axisTick: {
+            show: false
+          },
+          axisLine: {
+            show: false,
+            lineStyle: {
+              color: "#697886"
+            }
+          }
+        }
+      ],
+      series: [
+        {
+          name: '未开始',
+          type: 'bar',
+          barWidth: "24%",
+          stack: 'Ad',
+          itemStyle: {
+            color: '#5B8FF9'
+          },
+          emphasis: {
+            focus: 'series'
+          },
+          data: [6, 3, 9, 26, 3]
+        },
+        {
+          name: '进行中',
+          type: 'bar',
+          stack: 'Ad',
+          itemStyle: {
+            color: '#F6BD16'
+          },
+          emphasis: {
+            focus: 'series'
+          },
+          data: [4, 17, 10, 11, 8]
+        },
+        {
+          name: '已完成',
+          type: 'bar',
+          stack: 'Ad',
+          itemStyle: {
+            color: '#61DDAA'
+          },
+          emphasis: {
+            focus: 'series'
+          },
+          data: [12, 18, 19, 26, 5]
+        }
+      ]
+    };
+
+    if (option && typeof option === 'object') {
+      myChart.setOption(option);
+    }
+
+    window.addEventListener('resize', myChart.resize);
+  </script>
+</body>
+
+</html>

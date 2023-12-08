@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN" style="height: 100%">
+
+<head>
+  <meta charset="utf-8">
+</head>
+
+<body style="height: 100%; margin: 0">
+  <div id="container" style="height: 100%"></div>
+
+
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+
+  <script type="text/javascript">
+    var dom = document.getElementById('container');
+    var myChart = echarts.init(dom, null, {
+      renderer: 'canvas',
+      useDirtyRect: false
+    });
+    var app = {};
+
+    var option;
+
+    function getVirtualData(year) {
+      const date = +echarts.time.parse(year + '-01-01');
+      const end = +echarts.time.parse(+year + 1 + '-01-01');
+      const dayTime = 3600 * 24 * 10;
+      const data = [];
+      for (let time = date; time < end; time += dayTime) {
+        data.push([
+          echarts.time.format(time, '{yyyy}-{MM}-{dd}', false),
+          Math.floor(Math.random() * 10)
+        ]);
+      }
+      return data;
+    }
+    option = {
+      tooltip: {
+        position: 'top',
+        borderWidth: '0',
+        textStyle: {
+          fontSize: 12
+        }
+      },
+      visualMap: {
+        min: 0,
+        max: 12,
+        calculable: true,
+        orient: 'horizontal',
+        left: 'center',
+        top: 'top',
+        itemHeight: 120,
+        itemWidth: 16
+      },
+      calendar: [
+        {
+          range: '2023',
+          cellSize: ['auto', 20],
+          top: '80',
+          itemStyle: {
+            borderWidth: 0
+          },
+          splitLine: {
+            lineStyle: {
+              color: "#ffffff",
+              width: 2
+            }
+          },
+          dayLabel: {
+            color: "#324558",
+          },
+          monthLabel: {
+            color: "#324558"
+          }
+        }
+      ],
+      series: [
+        {
+          type: 'heatmap',
+          coordinateSystem: 'calendar',
+          calendarIndex: 0,
+          data: getVirtualData('2023')
+        }
+      ]
+    };
+
+    if (option && typeof option === 'object') {
+      myChart.setOption(option);
+    }
+
+    window.addEventListener('resize', myChart.resize);
+  </script>
+</body>
+
+</html>
