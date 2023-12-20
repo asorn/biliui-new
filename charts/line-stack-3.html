@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN" style="height: 100%">
+
+<head>
+  <meta charset="utf-8">
+</head>
+
+<body style="height: 100%; margin: 0">
+  <div id="container" style="height: 100%"></div>
+
+
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+
+  <script type="text/javascript">
+    var dom = document.getElementById('container');
+    var myChart = echarts.init(dom, null, {
+      renderer: 'canvas',
+      useDirtyRect: false
+    });
+    var app = {};
+
+    var option;
+
+    option = {
+      title: {
+        text: ''
+      },
+/*       color: {
+        data: ['#5470c6', '#91cc75', '#fac858', '#ee6666', '#73c0de', '#3ba272', '#fc8452', '#9a60b4', '#ea7ccc']
+      }, */
+      tooltip: {
+        trigger: 'axis',
+        textStyle: {
+          fontSize: 12
+        }
+      },
+      legend: {
+        show: 'false',
+        icon: "roundRect",
+        itemWidth: 16,
+        itemHeight: 8,
+        textStyle: {
+          color: "#324558",
+          fontStyle: "italic",
+          lineHeight: 20
+        },
+        data: ['逾期任务数', '12', '324']
+      },
+      grid: {
+        left: '1%',
+        right: '16px',
+        bottom: '3%',
+        top: '12px',
+        containLabel: true
+      },
+      xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        axisLine: {
+          show: true,
+          lineStyle: {
+            color: "#697886"
+          }
+        },
+        axisLabel: {
+          hideOverlap: true
+        },
+        data: ['06:19', '08:45', '09:01', '10:24', '12:05', '13:55', '14:32']
+      },
+      yAxis: {
+        type: 'value',
+        boundaryGap: false,
+        axisTick: {
+          show: false
+        },
+        axisLine: {
+          show: false,
+          lineStyle: {
+            color: "#697886"
+          }
+        }
+      },
+      series: [
+        {
+          name: '防御次数',
+          type: 'line',
+          stack: 'Total',
+          smooth: true,
+          itemStyle: {
+            color: '#15a675'
+          },
+          data: [18, 12, 9, 11, 8, 20, 15]
+        }
+      ]
+    };
+
+    if (option && typeof option === 'object') {
+      myChart.setOption(option);
+    }
+
+    window.addEventListener('resize', myChart.resize);
+  </script>
+</body>
+
+</html>

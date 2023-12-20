@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%">
+<head>
+  <meta charset="utf-8">
+</head>
+<body style="height: 100%; margin: 0">
+  <div id="container" style="height: 100%"></div>
+
+  <script type="text/javascript" src="https://registry.npmmirror.com/echarts/5.4.3/files/dist/echarts.min.js"></script>
+
+  <script type="text/javascript">
+    var dom = document.getElementById('container');
+    var myChart = echarts.init(dom, null, {
+      renderer: 'canvas',
+      useDirtyRect: false
+    });
+    var app = {};
+    
+    var option;
+
+    option = {
+  tooltip: {
+    trigger: 'axis',
+    textStyle: {
+      fontSize: 12
+    },
+    axisPointer: {
+      type: 'shadow'
+    }
+  },
+  grid: {
+    left: '12px',
+    right: '12px',
+    bottom: '3%',
+    top: '3%',
+    containLabel: true
+  },
+  xAxis: {
+    type: 'value',
+    axisLine: {
+      show: false,
+      lineStyle: {
+        color: "#697886"
+      }
+    },
+    axisLabel: {
+      hideOverlap: true
+    },
+    boundaryGap: [0, 0.01]
+  },
+  yAxis: {
+    type: 'category',
+    axisLine: {
+      show: true,
+      lineStyle: {
+        color: "#697886"
+      }
+    },
+    axisLabel: {
+      show: true,
+      rotate: '0',
+      hideOverlap: true
+    },
+    data: ['113.8.16.224', '58.11.101.4', '20.117.2.93', '14.56.155.7', '206.3.14.5']
+  },
+  series: [
+    {
+      name: '被攻击次数',
+      type: 'bar',
+      barWidth: "50%",
+      itemStyle: {
+        color: '#5B8FF9'
+      },
+      data: [108, 226, 301, 476, 552],
+      label: {
+        show: true,
+        position: 'inside',
+        color: '#ffffff'
+      },
+    }
+  ]
+};
+
+    if (option && typeof option === 'object') {
+      myChart.setOption(option);
+    }
+
+    window.addEventListener('resize', myChart.resize);
+  </script>
+</body>
+</html>
